@@ -43,7 +43,7 @@ app.MapPost("/books", async (CreateBookRequest request, ApplicationContext conte
 app.MapDelete("/books/{id:guid}", async (Guid id, ApplicationContext context) =>
 {
     var book = await context.Books
-        .FirstOrDefaultAsync(p.Id == id);
+        .FirstOrDefaultAsync(x => x.Id == id);
 
     if (book is not null)
     {
