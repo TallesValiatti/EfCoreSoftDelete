@@ -56,12 +56,10 @@ app.MapDelete("/books/{id:guid}", async (Guid id, ApplicationContext context) =>
 .WithName("DeleteBooks")
 .WithOpenApi();
 
-app.MapGet("/books", async (ApplicationContext context) =>
-{
-    return Results.Ok(await context.Books
-        .AsNoTracking()
-        .ToListAsync());
-})
+app.MapGet("/books", async (ApplicationContext context) => 
+        Results.Ok((object?)await context.Books
+            .AsNoTracking()
+            .ToListAsync()))
 .WithName("ListBooks")
 .WithOpenApi();
 
