@@ -24,6 +24,7 @@ app.UseSwaggerUI();
 app.UseHttpsRedirection();
 
 
+// Create
 app.MapPost("/books", async (CreateBookRequest request, ApplicationContext context) =>
 {
     var book = new Book
@@ -40,6 +41,7 @@ app.MapPost("/books", async (CreateBookRequest request, ApplicationContext conte
 .WithName("CreateBook")
 .WithOpenApi();
 
+// Delete
 app.MapDelete("/books/{id:guid}", async (Guid id, ApplicationContext context) =>
 {
     var book = await context.Books
@@ -56,8 +58,9 @@ app.MapDelete("/books/{id:guid}", async (Guid id, ApplicationContext context) =>
 .WithName("DeleteBooks")
 .WithOpenApi();
 
+// List
 app.MapGet("/books", async (ApplicationContext context) => 
-        Results.Ok((object?)await context.Books
+        Results.Ok(await context.Books
             .AsNoTracking()
             .ToListAsync()))
 .WithName("ListBooks")
